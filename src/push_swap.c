@@ -14,21 +14,21 @@
 
 int main(int ac, char **av)
 {
-    t_stack *a;
-    t_stack *b;
+    t_stack *a; // stores pointer to stack a
+    t_stack *b; // stores pointer to stack b
     char **num_array;
 
     a = NULL;
     b = NULL;
     if( ac == 1 || (ac == 2 && !av[1][0]) ) // Check for empty input
-        return (1);
-    //if(ac < 2)
-    //    return (1);
-    //else if (ac == 2)
-    //    num_array = ft_split(av[1], ' '); // Split the input string into arguments
-    num_array = init_args(ac,av); 
-    init_stack(&a, num_array); // Initialize stack a with the arguments
+        return (1); // 1 because to indicate an error in input
+    num_array = init_args(&a,ac,av); // make a char** array of the numbers
+    init_stack_a(&a, num_array); // Initialize stack a with the arguments
+    if(!is_stack_sorted(a))
+        sort_stacks(&a,&b);
+    free_stacks(&a);
     return (0);
 }
+
 
 
