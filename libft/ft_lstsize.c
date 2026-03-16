@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2024/12/22 14:07:04 by tvithara          #+#    #+#             */
+/*   Updated: 2024/12/22 14:07:07 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_lstsize(t_list *lst)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
+	int	i;
 
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

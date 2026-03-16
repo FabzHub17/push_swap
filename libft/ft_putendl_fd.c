@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2024/12/21 17:22:31 by tvithara          #+#    #+#             */
+/*   Updated: 2024/12/22 17:21:40 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_putendl_fd(char *s, int fd)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
-
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
 }

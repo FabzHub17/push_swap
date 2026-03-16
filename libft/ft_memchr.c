@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2024/12/21 11:36:45 by tvithara          #+#    #+#             */
+/*   Updated: 2024/12/21 11:36:47 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memchr(const void *str, int c, size_t n)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
+	unsigned char	*s;
 
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	s = (unsigned char *)str;
+	c = (unsigned char)c;
+	while (n > 0 && *s != c)
+	{
+		s++;
+		n--;
+	}
+	if (n)
+		return ((void *)s);
+	return (NULL);
 }

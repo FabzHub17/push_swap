@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2024/12/10 18:58:29 by tvithara          #+#    #+#             */
+/*   Updated: 2024/12/10 19:06:43 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "../includes/push_swap.h"
-
-int	main(int ac, char **av)
+int	ft_toupper(int c)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
-
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

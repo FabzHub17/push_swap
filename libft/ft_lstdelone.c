@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2024/12/22 14:08:06 by tvithara          #+#    #+#             */
+/*   Updated: 2024/12/22 14:08:09 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
-
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst);
 }

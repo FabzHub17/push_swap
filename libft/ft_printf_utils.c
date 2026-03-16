@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2025/01/16 19:47:24 by tvithara          #+#    #+#             */
+/*   Updated: 2025/01/16 19:47:26 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "./includes/ft_printf.h"
 
-int	main(int ac, char **av)
+int	ft_putchar(char c)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
+	ft_putchar_fd(c, 1);
+	return (1);
+}
 
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+int	ft_putstr(char *str)
+{
+	int	len;
+
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	len = ft_strlen(str);
+	ft_putstr_fd(str, 1);
+	return (len);
 }

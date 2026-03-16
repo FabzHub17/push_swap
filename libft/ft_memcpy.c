@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2024/12/21 11:33:37 by tvithara          #+#    #+#             */
+/*   Updated: 2024/12/21 11:33:42 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	if (d == NULL && s == NULL)
+		return (dest);
+	while (n > 0)
+	{
+		*(d++) = *(s++);
+		n--;
+	}
+	return (dest);
 }

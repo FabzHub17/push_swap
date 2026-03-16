@@ -1,38 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 19:16:52 by tvithara          #+#    #+#             */
+/*   Updated: 2025/06/16 19:16:54 by tvithara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-//char	*ft_strdup(const char *s);
-//char **array_cpy(char **dest, char **src, int start_index, int size);
-
-char **init_args(t_stack **stack, int ac, char **av)
+char	**init_args(int ac, char **av)
 {
-    char **array;
-    int i;
+	char	**nums_array;
 
-    i = 1;
-    array = NULL;
-    // if a num set is given within brackets
-    if (ac == 2)
-    {
-        array = ft_split(av[1], ' ');
-        if (!array)
-            return (NULL);
-    }
-    else
-         // if a num set is given as separate arguments
-        array = av + 1; // Point to the first argument
-
-    return(array);
+	nums_array = NULL;
+	if (ac == 2)
+	{
+		if (ft_strchr(av[1], ' '))
+		{
+			nums_array = ft_split(av[1], ' ');
+			if (!nums_array)
+				return (NULL);
+		}
+		else
+			nums_array = av + 1;
+	}
+	else
+		nums_array = av + 1;
+	return (nums_array);
 }
 
-static long	ft_atol(const char *s) //Define a function that converts every string into a long value
+long	ft_atol(const char *s)
 {
 	long	result;
 	int		sign;
 
 	result = 0;
-	sign = 1; 
-	while (*s == ' ' || *s == '\t' || *s == '\n' || \
-			*s == '\r' || *s == '\f' || *s == '\v')
+	sign = 1;
+	while (*s == ' ' || (*s >= '\t' && *s <= '\r'))
 		s++;
 	if (*s == '-' || *s == '+')
 	{
@@ -45,57 +53,30 @@ static long	ft_atol(const char *s) //Define a function that converts every strin
 	return (result * sign);
 }
 
-
-/*
-char **array_cpy(char **dest, char **src, int start_index, int size)
+bool	is_stack_sorted(t_stack *stack)
 {
-    int i;
-
-    //Allocate memory for array is it's NULL
-    if(!dest)
-    {
-        dest = (char **)malloc(sizeof(char *) * size);
-        if(!dest)
-            return(NULL);
-    }
-    // Copy elements from src to dest
-    i = 0;
-    while(i < size - start_index)
-    {
-        dest[i] = ft_strdup(src[start_index + i]);
-        if (!dest[i])
-        {
-            // Free previously allocated memory in case of failure
-            while (i > 0)
-            {
-                free(dest[i - 1]);
-                i--;
-            }
-            free(dest);
-            return;
-        }
-        i++;
-    }
-    dest[i] = NULL; // Null-terminate the array
-    return (dest);
-
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*ptr;
-	size_t	i;
-
-	i = 0;
-	ptr = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (s[i] != '\0')
+	if (!stack)
+		return (true);
+	while (stack && stack->next)
 	{
-		ptr[i] = s[i];
-		i++;
+		if (stack->num > stack->next->num)
+			return (false);
+		stack = stack->next;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (true);
 }
-    */
+
+int	stack_len(t_stack *stack)
+{
+	int	size;
+
+	if (!stack)
+		return (0);
+	size = 0;
+	while (stack)
+	{
+		stack = stack->next;
+		size++;
+	}
+	return (size);
+}

@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvithara <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:12:39 by tvithara          #+#    #+#             */
-/*   Updated: 2025/06/16 19:12:43 by tvithara         ###   ########.fr       */
+/*   Created: 2025/01/22 18:19:23 by tvithara          #+#    #+#             */
+/*   Updated: 2025/01/22 18:19:31 by tvithara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "./includes/ft_printf.h"
 
-int	main(int ac, char **av)
+int	ft_puthex(unsigned int num, char c)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**nums;
+	int	count;
 
-	a = NULL;
-	b = NULL;
-	if (ac < 2)
-		return (1);
-	nums = init_args(ac, av);
-	stack_init(&a, nums);
-	if (!is_stack_sorted(a))
-		stack_sort(&a, &b);
-	free_stack(&a);
-	free_stack(&b);
-	free_args(nums, ac, av);
-	return (0);
+	count = 0;
+	if (num == 0)
+		return (ft_putchar('0'));
+	if (num >= 16)
+		count += ft_puthex(num / 16, c);
+	if (num % 16 <= 9)
+		count += ft_putchar((num % 16) + '0');
+	else
+	{
+		if (c == 'x')
+			count += ft_putchar((num % 16) - 10 + 'a');
+		else
+			count += ft_putchar((num % 16) - 10 + 'A');
+	}
+	return (count);
 }
